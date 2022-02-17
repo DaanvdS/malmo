@@ -10,7 +10,7 @@ host = '11.0.0.54'
 port = 25001
 
 
-
+time.sleep(15)
 def decodeResponse(s):
     if s=="play":
         player.play()
