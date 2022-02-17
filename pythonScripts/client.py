@@ -9,8 +9,6 @@ ClientSocket = socket.socket()
 host = '11.0.0.54'
 port = 25001
 
-
-time.sleep(15)
 def decodeResponse(s):
     if s=="play":
         player.play()
@@ -37,9 +35,9 @@ class VLC:
     def addPlaylist(self):
         self.mediaList = self.Player.media_list_new()
         if platform.system()=="Windows":
-            path = r"D:/Projects/malmo/Audio/"
+            path = r"D:/Projects/Camiel/malmo/Audio/"
         else:
-            path = r"/home/pi/Desktop/Audio/"
+            path = r"/home/pi/Desktop/malmo/Audio/"
         #songs = os.listdir(path)
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
