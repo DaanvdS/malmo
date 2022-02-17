@@ -41,7 +41,6 @@ class VLC:
         #songs = os.listdir(path)
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
-        i=0
         self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(i%2)+".wav"))))
         self.listPlayer = self.Player.media_list_player_new()
         self.listPlayer.set_media_list(self.mediaList)
