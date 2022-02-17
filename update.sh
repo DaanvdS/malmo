@@ -5,6 +5,7 @@ cd Audio
 if cmp --silent -- "versionGit" "versionFTP"; then
   echo "No audio update needed"
 else
+  wget http://daanvanderspek.nl/malmo/Audio/versionFTP
   wget http://daanvanderspek.nl/malmo/Audio/0.wav
   wget http://daanvanderspek.nl/malmo/Audio/1.wav
   wget http://daanvanderspek.nl/malmo/Audio/2.wav
