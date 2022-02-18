@@ -4,6 +4,7 @@ import time
 import platform
 import os
 import sys
+import random
 from _thread import *
 
 ClientSocket = ""
@@ -30,7 +31,7 @@ class VLC:
         #songs = os.listdir(path)
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
-        self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(i%2)+".wav"))))
+        self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".wav"))))
         self.listPlayer = self.Player.media_list_player_new()
         self.listPlayer.set_media_list(self.mediaList)
     def play(self):
