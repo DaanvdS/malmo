@@ -1,1 +1,1 @@
-python /home/pi/malmo/pythonScripts/client.py
+python /home/pi/Desktop/malmo/pythonScripts/client.py
