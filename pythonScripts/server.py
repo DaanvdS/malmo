@@ -43,7 +43,7 @@ class Server:
         self.maxI = int(sys.argv[1])
         self.x=0
         self.prevssw=-1
-        self.message = ""
+        self.message = "s play"
         self.running = True
         self.doneAccepting = False
         self.lastCheckTime = 0
