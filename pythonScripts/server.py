@@ -11,11 +11,13 @@ class Connection:
         self.q = Queue(maxsize = 2)
         self.client = ""
         self.connected = False
+        self.recovering = False
         
     def connect(self, client, address):
         self.client = client
         self.connected = True
         self.ip = address[0]
+        self.recovering = False
         print('Connected to: ' + self.ip)
         start_new_thread(self.sendThread, ())
 
@@ -68,7 +70,7 @@ class Server:
             i=self.findConnctionWithIP(ip)
             if(i>=0):
                 print("Recovered "+str(ip))
-                self.connections[i].connect(client, address)
+                self.connections[i].connect(client, address)                
                 self.doneAccepting=True
             else:
                 print("IP not found in connections, this shouldnt be possible")
@@ -134,16 +136,17 @@ class Server:
         elif(self.ssw == 50):
             #check if all connections are still live if not checked in the last 30 seconds
             for c in self.connections:
-                if(not c.connected):
+                if(not c.connected and not c.recovering):
                     start_new_thread(self.acceptConnectionIP,(c.ip, ))
+                    c.recovering = True
                 
             self.ssw=100
         elif(self.ssw == 100):
-            if(self.lastAlive+1<time.time()):
+            if(self.lastAlive+5<time.time()):
                 for c in self.connections:
                     c.sendAlive()
                 self.lastAlive=time.time()
-            if(self.lastCheckTime+1<time.time()):
+            if(self.lastCheckTime+5<time.time()):
                 self.lastCheckTime=time.time()
                 self.ssw=50
             
