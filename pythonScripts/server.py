@@ -50,6 +50,7 @@ class Server:
         self.doneAccepting = False
         self.lastCheckTime = 0
         self.lastAlive = 0
+        self.start = 0
         self.ServerSocket=""
         
     def findConnctionWithIP(self,ip):
@@ -86,6 +87,7 @@ class Server:
         if(self.ssw == 0):
             #Reset
             self.connections = []
+            self.start = time.time()
             self.ssw=10
         elif(self.ssw == 10):
             #Start accepting connections
@@ -113,15 +115,18 @@ class Server:
             self.ssw = 30
         elif(self.ssw == 30):
             #Check if accepting is done (1 conn)
-            if(self.doneAccepting):
-                self.x=self.x+1
-                if(self.x<self.maxI):
-                    self.doneAccepting=False
-                    self.ssw=20
-                else:
-                    self.ssw=40
+            if(self.start+30<time.time()):
+                self.ssw=100
             else:
-                self.ssw=30
+                if(self.doneAccepting):
+                    self.x=self.x+1
+                    if(self.x<self.maxI):
+                        self.doneAccepting=False
+                        self.ssw=20
+                    else:
+                        self.ssw=40
+                else:
+                    self.ssw=30
         elif(self.ssw == 40):
             #check untill all connections are live
             done = True

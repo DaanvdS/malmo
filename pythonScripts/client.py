@@ -80,6 +80,7 @@ def receive():
             Response = ClientSocket.recv(1024)
         except socket.error as e:
             print("Lost server")
+            player.stop()
             connected = False
             break
         if Response.decode('utf-8') == "Exiting":
