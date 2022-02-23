@@ -1,4 +1,5 @@
 cd Desktop
+cd malmo
 git pull
 cd Audio
 
