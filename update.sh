@@ -2,7 +2,7 @@ cd Desktop
 cd malmo
 git pull
 
-sudo chmod +x ~/Desktop/malmo/start.py
+sudo chmod +x ~/Desktop/malmo/start.sh
 sudo cp malmo.desktop /etc/xdg/autostart/malmo.desktop
 cd Audio
 
