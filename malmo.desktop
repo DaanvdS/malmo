@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Malmo
+Comment=Malmo
+NoDisplay=false
+Exec=/usr/bin/lxterminal -e sh /home/pi/Desktop/malmo/start.sh
+NotShowIn=GNOME;KDE;XFCE;
