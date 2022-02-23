@@ -2,7 +2,7 @@ cd Desktop
 cd malmo
 git pull
 
-cp malmo.desktop /etc/xdg/autostart/malmo.desktop
+sudo cp malmo.desktop /etc/xdg/autostart/malmo.desktop
 cd Audio
 
 if cmp --silent -- "versionGit" "versionFTP"; then
