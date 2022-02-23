@@ -115,7 +115,7 @@ class Server:
             self.ssw = 30
         elif(self.ssw == 30):
             #Check if accepting is done (1 conn)
-            if(self.start+120<time.time()):
+            if(self.start+120<time.time() and self.x>1):
                 self.ssw=100
             else:
                 if(self.doneAccepting):
