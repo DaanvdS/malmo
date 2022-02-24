@@ -39,12 +39,13 @@ def findAudiofile():
     elif(h=="pi-measure"):
         return "7.mp3"
     else:
-        return "0.mp3"
+        return "0.wav"
 
 class VLC:
     def __init__(self):
         self.Player = Instance('--loop')
-
+        self.listPlayer = self.Player.media_list_player_new()
+        self.playing = False
     def addPlaylist(self):
         self.mediaList = self.Player.media_list_new()
         if platform.system()=="Windows":
@@ -55,16 +56,24 @@ class VLC:
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
         #self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".mp3"))))
-        self.mediaList.add_media(self.Player.media_new(os.path.join(path,findAudiofile())))
-        self.listPlayer = self.Player.media_list_player_new()
+        filepath = os.path.join(path,findAudiofile())
+        medi= self.Player.media_new(filepath)
+        self.mediaList.add_media(medi)
         self.listPlayer.set_media_list(self.mediaList)
-        self.Player.vlm_set_loop("1", True)
+        self.Player.vlm_set_loop(filepath, True)
     def play(self):
         self.listPlayer.play()
+        self.playing = True
     def pause(self):
         self.listPlayer.pause()
+        self.playing = False
     def stop(self):
         self.listPlayer.stop()
+        self.playing = False
+    def checkLoop(self):
+        #print("State="+str(self.listPlayer.get_state()))
+        if(self.playing and self.listPlayer.get_state()==6):
+            self.play()
 
 player = VLC()
 player.addPlaylist()
@@ -82,7 +91,7 @@ def start():
     while(not connected):
         try:
             ClientSocket = socket.socket()
-            host = '11.0.0.30'
+            host = '127.0.0.1'
             port = 25001
             ClientSocket.connect((host, port))
             connected=True
@@ -136,6 +145,7 @@ def startReceiving():
     start_new_thread(listenToSTDIN, ())
     
     while(connected):
+        player.checkLoop()
         time.sleep(1)
     time.sleep(2)
     ClientSocket.close()
