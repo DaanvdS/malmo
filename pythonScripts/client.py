@@ -21,25 +21,25 @@ def decodeResponse(s):
 def findAudiofile():
     h=socket.gethostname()
     if(h=="pi-value"):
-        return "1.wav"
+        return "1.mp3"
     elif(h=="pi-connected"):
-        return "2.wav"
+        return "2.mp3"
     elif(h=="pi-more"):
-        return "3.wav"
+        return "3.mp3"
     elif(h=="pi-emergence-l"):
-        return "4L.wav"
+        return "4L.mp3"
     elif(h=="pi-emergence-r"):
-        return "4R.wav"
+        return "4R.mp3"
     elif(h=="pi-perspective"):
-        return "5.wav"
+        return "5.mp3"
     elif(h=="pi-binary-l"):
-        return "6L.wav"
+        return "6L.mp3"
     elif(h=="pi-binary-r"):
-        return "6R.wav"
+        return "6R.mp3"
     elif(h=="pi-measure"):
-        return "7.wav"
+        return "7.mp3"
     else:
-        return "0.wav"
+        return "0.mp3"
 
 class VLC:
     def __init__(self):
@@ -54,7 +54,7 @@ class VLC:
         #songs = os.listdir(path)
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
-        #self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".wav"))))
+        #self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".mp3"))))
         self.mediaList.add_media(self.Player.media_new(os.path.join(path,findAudiofile())))
         self.listPlayer = self.Player.media_list_player_new()
         self.listPlayer.set_media_list(self.mediaList)
