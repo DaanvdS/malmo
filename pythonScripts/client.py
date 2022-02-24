@@ -6,6 +6,7 @@ import os
 import sys
 import random
 from _thread import *
+import socket
 
 ClientSocket = ""
 
@@ -17,6 +18,28 @@ def decodeResponse(s):
     elif s=="pause":
             player.pause()
 
+def findAudiofile():
+    h=socket.gethostname()
+    if(h=="pi-value"):
+        return "1.wav"
+    elif(h=="pi-connected"):
+        return "2.wav"
+    elif(h=="pi-more"):
+        return "3.wav"
+    elif(h=="pi-emergence-l"):
+        return "4L.wav"
+    elif(h=="pi-emergence-r"):
+        return "4R.wav"
+    elif(h=="pi-perspective"):
+        return "5.wav"
+    elif(h=="pi-binary-l"):
+        return "6L.wav"
+    elif(h=="pi-binary-r"):
+        return "6R.wav"
+    elif(h=="pi-measure"):
+        return "7.wav"
+    else:
+        return "0.wav"
 
 class VLC:
     def __init__(self):
@@ -31,7 +54,8 @@ class VLC:
         #songs = os.listdir(path)
         #for s in songs:
         #    self.mediaList.add_media(self.Player.media_new(os.path.join(path,s)))
-        self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".wav"))))
+        #self.mediaList.add_media(self.Player.media_new(os.path.join(path,str(str(random.randint(0, 1))+".wav"))))
+        self.mediaList.add_media(self.Player.media_new(os.path.join(path,findAudiofile())))
         self.listPlayer = self.Player.media_list_player_new()
         self.listPlayer.set_media_list(self.mediaList)
     def play(self):
@@ -121,4 +145,7 @@ def main():
         time.sleep(5)
     if(not closing): main()
     
+h=socket.gethostname()
+
+print(h)
 main()
