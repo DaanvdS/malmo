@@ -58,6 +58,7 @@ class VLC:
         self.mediaList.add_media(self.Player.media_new(os.path.join(path,findAudiofile())))
         self.listPlayer = self.Player.media_list_player_new()
         self.listPlayer.set_media_list(self.mediaList)
+        self.Player.vlm_set_loop("1", True)
     def play(self):
         self.listPlayer.play()
     def pause(self):
