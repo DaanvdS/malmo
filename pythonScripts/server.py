@@ -50,6 +50,7 @@ class Server:
         self.doneAccepting = False
         self.lastCheckTime = 0
         self.lastAlive = 0
+        self.waitTime = 0
         self.start = 0
         self.ServerSocket=""
         
@@ -135,17 +136,22 @@ class Server:
             
             if(done):
                 self.lastCheckTime=time.time()
-                self.ssw=100
+                self.waitTime=time.time()
+                self.ssw=60
             else:
                 self.ssw=40
+        
         elif(self.ssw == 50):
             #check if all connections are still live if not checked in the last 30 seconds
             for c in self.connections:
                 if(not c.connected and not c.recovering):
                     start_new_thread(self.acceptConnectionIP,(c.ip, ))
                     c.recovering = True
-                
+
             self.ssw=100
+        elif(self.ssw == 60):
+            if(self.waitTime+5<time.time()):
+                self.ssw=100
         elif(self.ssw == 100):
             if(self.lastAlive+5<time.time()):
                 for c in self.connections:
