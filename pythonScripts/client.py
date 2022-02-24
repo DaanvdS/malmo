@@ -117,7 +117,7 @@ def receive():
         if(s=="alive"):
             lastAlive=time.time()
         else:
-            decodeResponse(s)
+            decodeResponse(s.replace('alive', ''))
             print(s)
 
 def listenToSTDIN():
