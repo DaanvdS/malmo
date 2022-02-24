@@ -91,7 +91,7 @@ def start():
     while(not connected):
         try:
             ClientSocket = socket.socket()
-            host = '127.0.0.1'
+            host = '11.0.0.30'
             port = 25001
             ClientSocket.connect((host, port))
             connected=True
