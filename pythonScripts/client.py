@@ -30,7 +30,7 @@ def findAudiofile():
         return "4L.mp3"
     elif(h=="pi-emergence-right"):
         return "4R.mp3"
-    elif(h=="pi-perspective"):
+    elif(h=="pi-perspctive"):
         return "5.mp3"
     elif(h=="pi-binary-left"):
         return "6L.mp3"
