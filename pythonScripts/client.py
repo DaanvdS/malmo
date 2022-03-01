@@ -48,7 +48,7 @@ def findVolume():
     elif(h=="pi-connected"):
         return 150
     elif(h=="pi-measure"):
-        return 150
+        return 175
     else:
         return 125
 
