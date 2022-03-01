@@ -63,6 +63,7 @@ class VLC:
         self.Player.vlm_set_loop(filepath, True)
     def play(self):
         self.listPlayer.play()
+        self.listPlayer.get_media_player().audio_set_volume(120)
         self.playing = True
     def pause(self):
         self.listPlayer.pause()
