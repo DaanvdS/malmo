@@ -40,6 +40,17 @@ def findAudiofile():
         return "7.mp3"
     else:
         return "0.wav"
+        
+def findVolume():
+    h=socket.gethostname()
+    if(h=="pi-value"):
+        return 150
+    elif(h=="pi-connected"):
+        return 150
+    elif(h=="pi-measure"):
+        return 150
+    else:
+        return 125
 
 class VLC:
     def __init__(self):
@@ -63,7 +74,7 @@ class VLC:
         self.Player.vlm_set_loop(filepath, True)
     def play(self):
         self.listPlayer.play()
-        self.listPlayer.get_media_player().audio_set_volume(120)
+        self.listPlayer.get_media_player().audio_set_volume(findVolume())
         self.playing = True
     def pause(self):
         self.listPlayer.pause()
